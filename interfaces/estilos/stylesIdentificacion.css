@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+    padding: 20px;
+}
+
+.login-container {
+    background-color: #676767;
+    max-width: 340px;
+    margin: 20vh auto 0;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 290px; 
+}
+
+
+h2 {
+    color: #ffffff;
+    font-size: 24px;
+}
+
+form {
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: #d3d3d3;
+}
+
+button {
+    background-color: #cdcdcd;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+a{
+    margin-top: 2%;
+    color:white;
+}
+
+body{
+    background-image: url(../Imagenes/fondoimagen.png);
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#usuario::placeholder,#contraseña::placeholder {
+    color: rgb(0, 0, 0);
+}
+
+#regis a {
+    color: white;
+    text-decoration: none;
+}
+
+
+#regis {
+    width: 70%;
+}
+
+#abajo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ini{
+    margin-bottom: 2%;
+    width: 50%;
+}
+
+.error_mensaje{
+    color: red;
+}
