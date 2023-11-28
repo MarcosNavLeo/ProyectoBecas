@@ -9,5 +9,11 @@ if (isset($_GET['menu'])) {
     if ($_GET['menu'] == "login") {
         require_once $_SERVER["DOCUMENT_ROOT"] . '/interfaces/vistas/identificacion.php';
     }
+    if ($_GET['menu'] == "registro") {
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/interfaces/vistas/registrarse.php';
+    }
+    if ($_GET['menu'] == "PrinAlum") {
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/interfaces/vistas/principal.php';
+    }
 }
 ?>
