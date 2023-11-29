@@ -1,25 +1,33 @@
 window.addEventListener("load", function() {
-    // Verificar si se obtuvo el idCandidato
-    if (typeof idCandidato !== 'undefined' && idCandidato !== null) {
-        fetch(`http://virtual.local.marcos.com/api/apiconvocatorias.php?idCandidato=${idCandidato}`)
+    // Obtener el idCandidato de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const idCandidato = urlParams.get('id');
+
+    if (idCandidato) {
+        const apiUrl = `http://virtual.local.marcos.com/api/apiconvocatorias.php?idCandidato=${idCandidato}`;
+
+        fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                const convocatoriasList = document.getElementById('convocatorias-list');
+                const convocatoriasList = document.getElementById('listaconvo');
 
-                // Limpiamos la lista antes de agregar nuevos elementos
+                // Limpiar la lista antes de agregar nuevos elementos
                 convocatoriasList.innerHTML = '';
 
-                // Iteramos sobre los datos recibidos y creamos elementos li para cada convocatoria
+                // Iterar sobre los datos recibidos y crear elementos li para cada convocatoria
                 data.forEach(convocatoria => {
+                    console.log(convocatoria)
                     const listItem = document.createElement('li');
-                    listItem.textContent = `${convocatoria.idConvocatoria}: ${convocatoria.nombre}`; // Personaliza esto según tus datos
+                    listItem.textContent = `id Convocatoria=${convocatoria.idConvocatorias}: ${convocatoria.movilidades}`; // Personaliza según tus datos
                     convocatoriasList.appendChild(listItem);
                 });
             })
             .catch(error => console.error('Error al obtener las convocatorias:', error));
     } else {
-        console.error('No se encontró el idCandidato definido en el script');
+        console.error('No se encontró el idCandidato en la URL');
     }
 });
+
+
 
 

@@ -20,7 +20,11 @@ if (isset($_POST['login'])) {
     //Comprobamos validacion
     if ($valida->ValidacionPasada()) {
         if (!empty($_POST['nombre']) && !empty($_POST['pass'])) {
-            $login->user_login($_POST['nombre'],$_POST['pass']);
+            $logged_in = $login->user_login($_POST['nombre'], $_POST['pass']);
+
+            if (!$logged_in) {
+                $valida->ErrorAutenticacion();
+            }
         }
     }
 }
@@ -34,6 +38,7 @@ if (isset($_POST['login'])) {
             <?= $valida->ImprimirError('nombre') ?>
             <input type="password" id="contraseña" name="pass" placeholder="Contraseña">
             <?= $valida->ImprimirError('pass') ?>
+            <?= $valida->ImprimirError('autenticacion') ?>
             <div id="abajo">
                 <button id="ini" type="submit" name="login">INICIAR SESION</button>
                 <a href="index.php?menu=registro">REGISTRARSE</a></button>

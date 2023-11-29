@@ -18,12 +18,6 @@ class Validator
         return true;
     }
 
-    public function validaUsuarioContrasena($usuario, $contrasena)
-    {
-        if ($usuario !== 'usuario_valido' || $contrasena !== 'contrasena_valida') {
-            $this->errores['autenticacion'] = "El usuario o la contraseña son incorrectos";
-        }
-    }
 
     //funcion que valida un email
     public function validaEmail($email)
@@ -76,10 +70,15 @@ class Validator
     {
         if ($campo !== null && isset($this->errores[$campo])) {
             return '<span class="error_mensaje">' . $this->errores[$campo] . '</span>';
-        } else {
-            return '<span class="error_mensaje">El usuario o la contraseña son incorrectos</span>';
         }
     }
+    public function ErrorAutenticacion()
+    {
+        $this->errores['autenticacion'] = "El usuario o la contraseña son incorrectos";
+    }
+
+    
+
 
 
 }

@@ -17,7 +17,7 @@ class Login
             if ($userData->getRol() == "admin") {
                 header("location:?menu=PrinAdmin");
             } else if ($userData->getRol() == "alumno") {
-                header("location:?menu=PrinAlum");
+                header("location:?menu=PrinAlum&id=".$userData->getIdCandidato());
             }
             Session::loginsession($userData);
             return true;
