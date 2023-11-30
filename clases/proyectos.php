@@ -1,5 +1,5 @@
 <?php
-class Proyectos {
+class Proyectos  implements JsonSerializable{
     // Propiedades de la clase
     private $codProyecto;
     private $nombre;
@@ -7,7 +7,8 @@ class Proyectos {
     private $fechaFin;
 
     // Constructor
-    public function __construct($nombre, $fechaIni, $fechaFin) {
+    public function __construct($codProyecto,$nombre, $fechaIni, $fechaFin) {
+        $this->codProyecto = $codProyecto;
         $this->nombre = $nombre;
         $this->fechaIni = $fechaIni;
         $this->fechaFin = $fechaFin;
@@ -44,6 +45,12 @@ class Proyectos {
 
     public function getFechaFin() {
         return $this->fechaFin;
+    }
+
+    // Método de la interfaz JsonSerializable para serializar el objeto a JSON
+    public function jsonSerialize() {
+        $vars = get_object_vars($this);
+        return $vars; 
     }
 }
 ?>

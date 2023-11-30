@@ -15,5 +15,8 @@ if (isset($_GET['menu'])) {
     if ($_GET['menu'] == "PrinAlum") {
         require_once $_SERVER["DOCUMENT_ROOT"] . '/interfaces/vistas/principal.php';
     }
+    if ($_GET['menu'] == "PrinAdmin") {
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/interfaces/vistas/admin.php';
+    }
 }
 ?>

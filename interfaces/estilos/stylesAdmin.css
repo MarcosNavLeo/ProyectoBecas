@@ -1,0 +1,177 @@
+/* Estilos para el formulario */
+body {
+    background-image: url(../Imagenes/fondoimagen.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+.formulario {
+    width: 50%;
+    margin: auto;
+    padding: 50px;
+    font-family: Arial, sans-serif;
+    border-radius: 8px;
+    background-color: #efefef;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+/* Estilos para los labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* Estilos para los inputs y selects */
+select {
+    width: 96%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+select {
+    cursor: pointer;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 102.5%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border: 1px solid #b9b9b9;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Estilos para los inputs de tipo fecha */
+input[type="date"] {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Asegurar mayor especificidad */
+input.notaMaxima,
+input.notaMinima {
+    width: 70%;
+}
+
+input.puntos{
+    width: 80%;
+}
+
+nav {
+    background: rgba(183, 183, 183, 0.8);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a {
+    color: #000000;
+    text-decoration: none;
+}
+
+img {
+    width: 100px;
+    height: auto;
+    margin-left: 1%;
+}
+
+#enlacesNav {
+    margin-top: 4%;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+#enlacesNav a {
+    margin-right: 30px;
+}
+
+#Cierrasesion {
+    /* Cambiar el color de fondo */
+    background-color: #838383;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+#Cierrasesion:hover {
+    background-color: #646464;
+    color: #fff;
+}
+
+#SoliConvo {
+    /* Cambiar el color de fondo */
+    background-color: #838383;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#titulo {
+    margin-top: 4%;
+    text-align: center;
+    font-size: 1.5em;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f0f0f0, #dcdcdc);
+}
+
+#TituloCrear{
+    text-align: center;
+}
+
+/* Estilos para los fieldsets */
+fieldset {
+    width: 45%;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-left: 3.2%;
+    border: none; 
+}
+
+

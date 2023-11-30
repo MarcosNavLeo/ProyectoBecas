@@ -22,7 +22,31 @@ class Validator
     //funcion que valida un email
     public function validaEmail($email)
     {
+        // Utilizando una expresión regular para validar el formato del correo electrónico
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return true; // El correo electrónico es válido
+        } else {
+            return false; // El correo electrónico no es válido
+        }
     }
+
+    public function validaDNI($dni)
+{
+    // Validación básica de longitud y estructura del DNI
+    if (preg_match('/^[0-9]{8}[A-Za-z]$/', $dni)) {
+        $letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+        $dniNumero = substr($dni, 0, 8);
+        $letraValida = $letras[$dniNumero % 23];
+
+        // Verificar si la letra introducida coincide con la letra esperada
+        if (strtoupper($letraValida) === strtoupper(substr($dni, -1))) {
+            return true; // El DNI es válido
+        }
+    }
+    return false; // El DNI no es válido
+}
+
+
     //funcion que valida el rango de edad valido
     public function validaEdad($clave, $valor, $min, $max)
     {
@@ -77,7 +101,7 @@ class Validator
         $this->errores['autenticacion'] = "El usuario o la contraseña son incorrectos";
     }
 
-    
+
 
 
 

@@ -63,7 +63,7 @@ class RepositorioProyectos
 
     public function leerTodos()
     {
-        $query = "SELECT codProyecto, nombre, fechaIni, fechaFin FROM proyectos";
+        $query = "SELECT CodProyecto, Nombre, fecha_Ini, fecha_Fin FROM proyectos";
         $statement = $this->db->prepare($query);
         $statement->execute();
 
@@ -73,11 +73,11 @@ class RepositorioProyectos
 
         foreach ($proyectosList as $proyectoData) {
             $proyecto = new Proyectos(
-                $proyectoData['nombre'],
-                $proyectoData['fechaIni'],
-                $proyectoData['fechaFin']
+                $proyectoData['CodProyecto'],
+                $proyectoData['Nombre'],
+                $proyectoData['fecha_Ini'],
+                $proyectoData['fecha_Fin']
             );
-            $proyecto->setCodProyecto($proyectoData['codProyecto']);
             $proyectos[] = $proyecto;
         }
 
