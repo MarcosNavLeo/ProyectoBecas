@@ -11,13 +11,13 @@ class Convocatorias implements JsonSerializable
     private $fechaFinBaremacion;
     private $fechaLisProvisional;
     private $fechaLisDefinitiva;
+    private $destino;
     private $proyectosCodProyecto;
-    private $candidatosIdCandidato;
 
     // Constructor
-    public function __construct($idConvocatorias,$movilidades, $tipo, $fechaIni, $fechaFin, $fechaIniBaremacion, $fechaFinBaremacion, $fechaLisProvisional, $fechaLisDefinitiva, $proyectosCodProyecto, $candidatosIdCandidato)
+    public function __construct($idConvocatoria = null, $movilidades, $tipo, $fechaIni, $fechaFin, $fechaIniBaremacion, $fechaFinBaremacion, $fechaLisProvisional, $fechaLisDefinitiva,$destino,$proyectosCodProyecto)
     {
-        $this->idConvocatorias = $idConvocatorias;
+        $this->idConvocatorias = $idConvocatoria;
         $this->movilidades = $movilidades;
         $this->tipo = $tipo;
         $this->fechaIni = $fechaIni;
@@ -26,8 +26,8 @@ class Convocatorias implements JsonSerializable
         $this->fechaFinBaremacion = $fechaFinBaremacion;
         $this->fechaLisProvisional = $fechaLisProvisional;
         $this->fechaLisDefinitiva = $fechaLisDefinitiva;
+        $this->destino = $destino;
         $this->proyectosCodProyecto = $proyectosCodProyecto;
-        $this->candidatosIdCandidato = $candidatosIdCandidato;
     }
 
     public function setIdConvocatorias($idConvocatorias)
@@ -130,20 +130,23 @@ class Convocatorias implements JsonSerializable
         return $this->proyectosCodProyecto;
     }
 
-    public function setCandidatosIdCandidato($candidatosIdCandidato)
+    public function setDestino($destino)
     {
-        $this->candidatosIdCandidato = $candidatosIdCandidato;
+        $this->destino = $destino;
     }
 
-    public function getCandidatosIdCandidato()
+    public function getDestino()
     {
-        return $this->candidatosIdCandidato;
+        return $this->destino;
     }
+
+
 
     // Método de la interfaz JsonSerializable para serializar el objeto a JSON
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         $vars = get_object_vars($this);
-        return $vars; 
+        return $vars;
     }
 }
 ?>

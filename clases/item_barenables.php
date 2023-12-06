@@ -1,5 +1,5 @@
 <?php
-class ItemBarenables {
+class item_barenables implements JsonSerializable{
     // Propiedades de la clase
     private $idItemBarenables;
     private $nombre;
@@ -24,6 +24,12 @@ class ItemBarenables {
 
     public function getNombre() {
         return $this->nombre;
+    }
+
+    // Método de la interfaz JsonSerializable para serializar el objeto a JSON
+    public function jsonSerialize() {
+        $vars = get_object_vars($this);
+        return $vars; 
     }
 }
 ?>

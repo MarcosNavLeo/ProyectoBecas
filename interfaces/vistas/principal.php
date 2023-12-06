@@ -31,7 +31,7 @@
         ?>
         <div id="enlacesNav">
             <a href="?menu=examen">MIS CONVOCATORIAS</a>
-            <a><button value="SOLICITAR CONVOCATORIA" name="Solicitar" id="SoliConvo">SOLICITAR CONVOCATORIA</button></a>
+            <!-- <a><button value="SOLICITAR CONVOCATORIA" name="Solicitar" id="SoliConvo">SOLICITAR CONVOCATORIA</button></a> -->
             <form name="formulario" method="post">
                 <button type="submit" value="CERRAR SESION" name="Logaout" id="Cierrasesion">CERRAR SESION</button>
             </form>

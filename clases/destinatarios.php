@@ -1,5 +1,5 @@
 <?php
-class Destinatarios {
+class Destinatarios implements JsonSerializable{
     // Propiedades de la clase
     private $idDestinatarios;
     private $codGrupo;
@@ -34,6 +34,12 @@ class Destinatarios {
 
     public function getNombre() {
         return $this->nombre;
+    }
+
+    // Método de la interfaz JsonSerializable para serializar el objeto a JSON
+    public function jsonSerialize() {
+        $vars = get_object_vars($this);
+        return $vars; 
     }
 
 }

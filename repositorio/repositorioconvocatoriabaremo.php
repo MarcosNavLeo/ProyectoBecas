@@ -9,7 +9,7 @@ class RepositorioConvocatoriaBaremo
     }
 
     public function insertarConvocatoriaBaremo($convocatoriaBaremo) {
-        $query = "INSERT INTO convocatoria_baremo (idItemBaremo, idConvocatoria, maximoPuntos, requisito, minimo, presenta) 
+        $query = "INSERT INTO convocatoria_baremo (iditem_barenables, idConvocatorias, Maximo_puntos, requisito, minimo, presenta) 
                   VALUES (:idItemBaremo, :idConvocatoria, :maximoPuntos, :requisito, :minimo, :presenta)";
 
         $statement = $this->db->prepare($query);

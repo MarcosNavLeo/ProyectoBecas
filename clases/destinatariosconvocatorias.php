@@ -1,5 +1,5 @@
 <?php
-class DestinatariosConvocatorias {
+class destinatariosconvocatorias {
     // Propiedades de la clase
     private $idDestinatarios;
     private $idConvocatorias;

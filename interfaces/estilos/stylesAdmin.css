@@ -32,7 +32,6 @@ select {
     width: 96%;
     padding: 8px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
 }
@@ -41,7 +40,6 @@ input[type="text"] {
     width: 90%;
     padding: 8px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
 }
@@ -74,15 +72,14 @@ input[type="date"] {
     width: 90%;
     padding: 8px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
 }
 
 /* Asegurar mayor especificidad */
-input.notaMaxima,
-input.notaMinima {
-    width: 70%;
+input#notaMaxima,
+input#notaMinima {
+    width: 40%;
 }
 
 input.puntos{
@@ -172,6 +169,37 @@ fieldset {
     box-sizing: border-box;
     margin-left: 3.2%;
     border: none; 
+}
+
+#crear {
+    background-color: #cdcdcd;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 2%;
+    width: 30%;
+    font-weight: bold;
+    margin-left: 35%;
+}
+
+.error-fecha {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 2px;
+}
+
+#errorFormulario {
+    color: red;
+    margin-top: 20px;
+}
+
+.valido{
+    border-color: green;
+}
+.invalido{
+    border-color: red;
 }
 
 

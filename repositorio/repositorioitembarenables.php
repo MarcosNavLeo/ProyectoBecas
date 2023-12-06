@@ -50,7 +50,7 @@ class RepositorioItemBarenables {
     }
 
     public function leerTodos() {
-        $query = "SELECT idItemBarenables, nombre FROM item_barenables";
+        $query = "SELECT iditem_Barenables, nombre FROM item_barenables";
         $statement = $this->db->prepare($query);
         $statement->execute();
     
@@ -59,10 +59,10 @@ class RepositorioItemBarenables {
         $itemBarenables = array();
     
         foreach ($itemBarenablesList as $itemBarenableData) {
-            $itemBarenable = new ItemBarenables(
+            $itemBarenable = new item_barenables(
                 $itemBarenableData['nombre']
             );
-            $itemBarenable->setIdItemBarenables($itemBarenableData['idItemBarenables']);
+            $itemBarenable->setIdItemBarenables($itemBarenableData['iditem_Barenables']);
             $itemBarenables[] = $itemBarenable;
         }
     
@@ -70,7 +70,7 @@ class RepositorioItemBarenables {
     }
 
     public function leerItemBarenable($idItemBarenables) {
-        $query = "SELECT * FROM item_barenables WHERE idItemBarenables = :idItemBarenables";
+        $query = "SELECT * FROM item_barenables WHERE iditem_barenables = :idItemBarenables";
         $statement = $this->db->prepare($query);
         $statement->bindParam(':idItemBarenables', $idItemBarenables, PDO::PARAM_INT);
         $statement->execute();
@@ -78,7 +78,7 @@ class RepositorioItemBarenables {
         $itemBarenableData = $statement->fetch(PDO::FETCH_ASSOC);
     
         if ($itemBarenableData) {
-            $itemBarenable = new ItemBarenables(
+            $itemBarenable = new item_barenables(
                 $itemBarenableData['nombre']
             );
             $itemBarenable->setIdItemBarenables($itemBarenableData['idItemBarenables']);
@@ -87,4 +87,20 @@ class RepositorioItemBarenables {
     
         return null;
     }
+
+    public function leerid($nombre) {
+        $query = "SELECT iditem_barenables FROM item_barenables WHERE nombre = :nombre";
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+        $statement->execute();
+    
+        $itemBarenableData = $statement->fetch(PDO::FETCH_ASSOC);
+    
+        if ($itemBarenableData) {
+            return $itemBarenableData['iditem_barenables'];
+        }
+    
+        return null;
+    }
+    
 }
