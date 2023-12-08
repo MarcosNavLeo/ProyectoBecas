@@ -87,6 +87,31 @@ class RepositorioConvocatoriaBaremoIdioma
         return $convocatoriasBaremoIdioma;
     }
 
+    public function leerTodosConvo($idConvocatoria)
+    {
+        $query = "SELECT * FROM convocatoria_baremo_idioma WHERE convocatoria_baremo_idConvocatorias = :idConvocatoria";
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':idConvocatoria', $idConvocatoria, PDO::PARAM_INT);
+        $statement->execute();
+        
+
+        $convocatoriasBaremoIdiomaList = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $convocatoriasBaremoIdioma = array();
+
+        foreach ($convocatoriasBaremoIdiomaList as $convocatoriaBaremoIdiomaData) {
+            $convocatoriaBaremoIdioma = new ConvocatoriaBaremoIdioma(
+                $convocatoriaBaremoIdiomaData['convocatoria_baremo_iditem_barenables'],
+                $convocatoriaBaremoIdiomaData['convocatoria_baremo_idConvocatorias'],
+                $convocatoriaBaremoIdiomaData['Nivel idiomas_Nivel'],
+                $convocatoriaBaremoIdiomaData['puntos']
+            );
+            $convocatoriasBaremoIdioma[] = $convocatoriaBaremoIdioma;
+        }
+
+        return $convocatoriasBaremoIdioma;
+    }
+
     public function leerPorNivelIdioma($nivel)
     {
         $query = "SELECT * FROM convocatoria_baremo_idioma WHERE `Nivel idiomas_Nivel` = :nivel";

@@ -51,7 +51,7 @@
 
             <fieldset>
                 <label for="proyecto">Seleccionar Proyecto:</label>
-                <select id="proyecto" name="proyecto" data-valida="estaSeleccionado">
+                <select id="proyecto" name="proyecto" data-valida="seleccionado">
                     <option value="" selected disabled>Seleccionar Proyecto</option>
                 </select>
 

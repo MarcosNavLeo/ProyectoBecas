@@ -101,5 +101,24 @@ class RepositorioDestinatariosConvocatorias
 
         return null;
     }
+
+    public function leertodosdestina( $idConvocatorias)
+    {
+        $query = "SELECT * FROM destinatarios_convocatorias WHERE idConvocatorias = :idConvocatorias";
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':idConvocatorias', $idConvocatorias, PDO::PARAM_INT);
+        $statement->execute();
+
+        $destinatariosConvocatoriasData = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($destinatariosConvocatoriasData) {
+            return new destinatariosconvocatorias(
+                $destinatariosConvocatoriasData['idDestinatarios'],
+                $destinatariosConvocatoriasData['idConvocatorias']
+            );
+        }
+
+        return null;
+    }
 }
 

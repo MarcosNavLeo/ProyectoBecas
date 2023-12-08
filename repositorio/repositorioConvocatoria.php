@@ -128,5 +128,40 @@ class RepositorioConvocatoria
         
 
     }
+
+    public function leerConvocatoriasActivas()
+{
+    $currentDate = date('Y-m-d'); // Obtener la fecha actual
+
+    $query = "SELECT * FROM Convocatorias 
+              WHERE Fecha_ini = :fechaActual AND Fecha_fin >= :fechaActual";
+
+    $statement = $this->db->prepare($query);
+    $statement->bindParam(':fechaActual', $currentDate);
+    $statement->execute();
+
+    $convocatorias = [];
+
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $convocatoria = new Convocatorias(
+            $row['idConvocatorias'],
+            $row['Movilidades'],
+            $row['Tiipo'],
+            $row['Fecha_ini'],
+            $row['Fecha_fin'],
+            $row['Fecha_ini_baremacion'],
+            $row['Fecha_fin_baremacion'],
+            $row['Fecha_lis_provisional'],
+            $row['Fecha_lis_definitiva'],
+            $row['Destino'],
+            $row['Proyectos_CodProyecto']
+        );
+
+        $convocatorias[] = $convocatoria;
+    }
+
+    return $convocatorias;
+}
+
 }
 ?>

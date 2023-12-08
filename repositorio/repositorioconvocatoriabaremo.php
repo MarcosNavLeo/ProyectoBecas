@@ -126,5 +126,27 @@ class RepositorioConvocatoriaBaremo
     
         return null;
     }
+
+    public function leerConvocatoriasBaremo($idConvocatoria) {
+        $query = "SELECT * FROM convocatoria_baremo WHERE idConvocatorias = :idConvocatoria";
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':idConvocatoria', $idConvocatoria, PDO::PARAM_INT);
+        $statement->execute();
+    
+        $convocatoriaBaremoData = $statement->fetch(PDO::FETCH_ASSOC);
+    
+        if ($convocatoriaBaremoData) {
+            return new ConvocatoriaBaremo(
+                $convocatoriaBaremoData['iditem_barenables'],
+                $convocatoriaBaremoData['idConvocatorias'],
+                $convocatoriaBaremoData['Maximo_puntos'],
+                $convocatoriaBaremoData['requisito'],
+                $convocatoriaBaremoData['minimo'],
+                $convocatoriaBaremoData['presenta']
+            );
+        }
+    
+        return null;
+    }
 }
 

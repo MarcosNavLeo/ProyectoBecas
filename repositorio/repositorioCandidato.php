@@ -42,9 +42,42 @@ class repositorioCandidato
         }
     }
 
+    public function getCandidatoPorid($id)
+    {
+        $query = "SELECT * FROM Candidatos WHERE idCandidato = :id";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Aquí creas un objeto Candidato con los datos obtenidos de la base de datos
+            $candidato = new Candidatos(
+                $row['idCandidato'],
+                $row['DNI'],
+                $row['Apellidos'],
+                $row['Nombre'],
+                $row['curso'],
+                $row['Telefono'],
+                $row['correo'],
+                $row['Domicilio'],
+                $row['Fecha_nacimiento'],
+                $row['password'],
+                $row['rol']
+            );
+
+            return $candidato;
+
+        } else {
+            return null; // No se encontró ningún candidato con ese nombre
+        }
+    }
+
     public function getCandidatoPorNombre($nombre)
     {
-        $query = "SELECT * FROM Candidatos WHERE Nombre = :nombre";
+        $query = "SELECT * FROM Candidatos WHERE nombre = :nombre";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':nombre', $nombre);

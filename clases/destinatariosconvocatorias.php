@@ -1,5 +1,5 @@
 <?php
-class destinatariosconvocatorias {
+class destinatariosconvocatorias implements JsonSerializable {
     // Propiedades de la clase
     private $idDestinatarios;
     private $idConvocatorias;
@@ -25,6 +25,11 @@ class destinatariosconvocatorias {
 
     public function getIdConvocatorias() {
         return $this->idConvocatorias;
+    }
+    // Método de la interfaz JsonSerializable para serializar el objeto a JSON
+    public function jsonSerialize() {
+        $vars = get_object_vars($this);
+        return $vars; 
     }
 }
 ?>

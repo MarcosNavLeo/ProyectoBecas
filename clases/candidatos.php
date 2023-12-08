@@ -1,5 +1,5 @@
 <?php
-class Candidatos {
+class Candidatos implements JsonSerializable {
     private $idCandidato;
     private $DNI;
     private $Apellidos;
@@ -113,5 +113,11 @@ class Candidatos {
 
     public function setRol($rol) {
         $this->rol = $rol;
+    }
+
+    // Método de la interfaz JsonSerializable para serializar el objeto a JSON
+    public function jsonSerialize() {
+        $vars = get_object_vars($this);
+        return $vars; 
     }
 }

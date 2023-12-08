@@ -1,6 +1,6 @@
 <?php
 
-class ConvocatoriaBaremo {
+class ConvocatoriaBaremo implements JsonSerializable{
     // Propiedades de la clase
     private $idItemBaremo;
     private $idConvocatoria;
@@ -66,6 +66,12 @@ class ConvocatoriaBaremo {
 
     public function getPresenta() {
         return $this->presenta;
+    }
+
+    // Método de la interfaz JsonSerializable para serializar el objeto a JSON
+    public function jsonSerialize() {
+        $vars = get_object_vars($this);
+        return $vars; 
     }
 }
 ?>

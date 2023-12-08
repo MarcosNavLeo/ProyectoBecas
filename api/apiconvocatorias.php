@@ -6,31 +6,60 @@ $metodo = $_SERVER['REQUEST_METHOD'];
 
 // Manejo de solicitudes GET
 if ($metodo == 'GET') {
-    // Si se solicita un listado de convocatorias activas para un candidato específico
-    if (isset($_GET['idCandidato'])) {
+    // Si se solicita un listado de todas las convocatorias con sus destinatarios, baremos y baremos de idiomas
+    if (isset($_GET['todasConvocatorias'])) {
         try {
             $dbConnection = DB::abreconexion();
             $repositorioConvocatoria = new RepositorioConvocatoria($dbConnection);
+            $repositorioDestinatariosConvocatorias = new RepositorioDestinatariosConvocatorias($dbConnection);
+            $repositorioConvocatoriaBaremo = new RepositorioConvocatoriaBaremo($dbConnection);
+            $repositorioConvocatoriaBaremoIdioma = new RepositorioConvocatoriaBaremoIdioma($dbConnection);
 
-            $idCandidato = $_GET['idCandidato'];
+            // Consulta para obtener todas las convocatorias
+            $todasConvocatorias = $repositorioConvocatoria->leerConvocatoriasActivas();
 
-            // Consulta para obtener convocatorias activas para el candidato
-            $convocatoriasActivas = $repositorioConvocatoria->obtenerConvocatoriasActivas($idCandidato);
+            // Array para almacenar todas las convocatorias con su información relacionada
+            $convocatoriasConInfo = [];
 
-            // Si se obtienen convocatorias activas, las devuelve como JSON
-            if ($convocatoriasActivas) {
-                echo json_encode($convocatoriasActivas);
+            foreach ($todasConvocatorias as $convocatoria) {
+                $idConvocatoria = $convocatoria->getIdConvocatorias();
+
+                // Obtener destinatarios de la convocatoria
+                $destinatariosConvocatoria = $repositorioDestinatariosConvocatorias->leertodosdestina($idConvocatoria);
+
+                // Obtener baremos de la convocatoria
+                $convocatoriaBaremos = $repositorioConvocatoriaBaremo->leerConvocatoriasBaremo($idConvocatoria);
+
+                // Obtener baremos de idiomas de la convocatoria
+                $convocatoriaBaremosIdiomas = $repositorioConvocatoriaBaremoIdioma->leerTodosConvo($idConvocatoria);
+
+                // Construir información completa de la convocatoria
+                $infoConvocatoria = [
+                    'convocatoria' => $convocatoria,
+                    'destinatarios' => $destinatariosConvocatoria,
+                    'baremos' => $convocatoriaBaremos,
+                    'baremos_idiomas' => $convocatoriaBaremosIdiomas
+                ];
+
+                // Agregar información de la convocatoria al array
+                $convocatoriasConInfo[] = $infoConvocatoria;
+            }
+
+            // Si se encuentran convocatorias, las devuelve como JSON
+            if (!empty($convocatoriasConInfo)) {
+                echo json_encode($convocatoriasConInfo);
             } else {
-                echo json_encode(array('mensaje' => 'No se encontraron convocatorias activas para este candidato.'));
+                echo json_encode(array('mensaje' => 'No se encontraron convocatorias.'));
             }
         } catch (Exception $e) {
             // Manejo de excepciones: Si ocurre un error inesperado, se captura y se imprime un mensaje de error
-            echo json_encode(array('error' => 'Error al obtener las convocatorias activas: ' . $e->getMessage()));
+            echo json_encode(array('error' => 'Error al obtener las convocatorias: ' . $e->getMessage()));
         }
     } else {
-        echo json_encode(array('error' => 'Se requiere el parametro idCandidato.'));
+        echo json_encode(array('error' => 'Se requiere el parámetro "todasConvocatorias".'));
     }
 } else {
     echo json_encode(array('error' => 'Método no permitido.'));
 }
 ?>
+

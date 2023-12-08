@@ -9,16 +9,30 @@ class RepositorioCandidatoConvocatorias
     }
 
     public function insertarCandidatoConvocatoria($candidatoConvocatoria) {
-        $query = "INSERT INTO candidato_convocatorias (Convocatorias_idConvocatorias, Candidatos_idCandidato) 
-                  VALUES (:idConvocatoria, :idCandidato)";
+        
+        $idConvocatoria = $candidatoConvocatoria->getIdConvocatoria();
+        $idCandidato = $candidatoConvocatoria->getIdCandidato();
+        $DNI = $candidatoConvocatoria->getDNI();
+        $Nombre = $candidatoConvocatoria->getNombre();
+        $Apellidos = $candidatoConvocatoria->getApellidos();
+        $Telefono = $candidatoConvocatoria->getTelefono();
+        $Correo = $candidatoConvocatoria->getCorreo();
+        $Domicilio = $candidatoConvocatoria->getDomicilio();
+        
+        $query = "INSERT INTO candidato_convocatorias (Convocatorias_idConvocatorias, Candidatos_idCandidato,DNI,Nombre,Apellidos,Telefono,Correo,Domicilio) 
+                  VALUES (:idConvocatoria, :idCandidato,:DNI,:Nombre,:Apellidos,:Telefono,:Correo,:Domicilio)";
 
         $statement = $this->db->prepare($query);
 
-        $idConvocatoria = $candidatoConvocatoria->getIdConvocatoria();
-        $idCandidato = $candidatoConvocatoria->getIdCandidato();
 
         $statement->bindParam(':idConvocatoria', $idConvocatoria, PDO::PARAM_INT);
         $statement->bindParam(':idCandidato', $idCandidato, PDO::PARAM_INT);
+        $statement->bindParam(':DNI', $DNI, PDO::PARAM_STR);
+        $statement->bindParam(':Nombre', $Nombre, PDO::PARAM_STR);
+        $statement->bindParam(':Apellidos', $Apellidos, PDO::PARAM_STR);
+        $statement->bindParam(':Telefono', $Telefono, PDO::PARAM_STR);
+        $statement->bindParam(':Correo', $Correo, PDO::PARAM_STR);
+        $statement->bindParam(':Domicilio', $Domicilio, PDO::PARAM_STR);
 
         return $statement->execute();
     }
