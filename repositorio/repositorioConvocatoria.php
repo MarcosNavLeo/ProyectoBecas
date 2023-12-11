@@ -8,7 +8,8 @@ class RepositorioConvocatoria
         $this->db = $conexion;
     }
 
-    public function obtenerConvocatoriasActivas($idCandidato) {
+    public function obtenerConvocatoriasActivas($idCandidato)
+    {
         $query = "SELECT *
             FROM Convocatorias
             WHERE idCandidato = :idCandidato";
@@ -40,7 +41,8 @@ class RepositorioConvocatoria
         return $convocatoriasActivas;
     }
 
-    public function insertarConvocatoria($convocatoria) {
+    public function insertarConvocatoria($convocatoria)
+    {
         $query = "INSERT INTO Convocatorias 
                   (Movilidades, Tiipo, Fecha_ini, Fecha_fin, Fecha_ini_baremacion, 
                   Fecha_fin_baremacion, Fecha_lis_provisional, Fecha_lis_definitiva,Destino,
@@ -49,9 +51,9 @@ class RepositorioConvocatoria
                   (:movilidades, :tiipo, :fechaIni, :fechaFin, :fechaIniBaremacion, 
                   :fechaFinBaremacion, :fechaLisProvisional, :fechaLisDefinitiva,:destino,
                   :codProyecto)";
-    
+
         $statement = $this->db->prepare($query);
-    
+
         $movilidades = $convocatoria->getMovilidades();
         $tiipo = $convocatoria->getTipo();
         $fechaIni = $convocatoria->getFechaIni();
@@ -62,7 +64,7 @@ class RepositorioConvocatoria
         $fechaLisDefinitiva = $convocatoria->getFechaLisDefinitiva();
         $destino = $convocatoria->getDestino();
         $codProyecto = $convocatoria->getProyectosCodProyecto();
-    
+
         $statement->bindParam(':movilidades', $movilidades);
         $statement->bindParam(':tiipo', $tiipo);
         $statement->bindParam(':fechaIni', $fechaIni);
@@ -73,11 +75,12 @@ class RepositorioConvocatoria
         $statement->bindParam(':fechaLisDefinitiva', $fechaLisDefinitiva);
         $statement->bindParam(':destino', $destino);
         $statement->bindParam(':codProyecto', $codProyecto);
-    
+
         return $statement->execute();
     }
-    
-    public function borrarConvocatoria($idConvocatoria) {
+
+    public function borrarConvocatoria($idConvocatoria)
+    {
         $query = "DELETE FROM Convocatorias WHERE idConvocatorias = :idConvocatoria";
 
         $statement = $this->db->prepare($query);
@@ -86,7 +89,8 @@ class RepositorioConvocatoria
         return $statement->execute();
     }
 
-    public function actualizarConvocatoria($convocatoria) {
+    public function actualizarConvocatoria($convocatoria)
+    {
         $query = "UPDATE Convocatorias 
                   SET Movilidades = :movilidades,
                       Tiipo = :tiipo,
@@ -117,51 +121,90 @@ class RepositorioConvocatoria
         return $statement->execute();
     }
 
-    public function obtenerUltimoIDInsertado() {
+    public function obtenerUltimoIDInsertado()
+    {
         // Suponiendo que estás usando PDO
         $lastID = $this->db->lastInsertId();
 
         return $lastID;
     }
 
-    public function crearconvocatoriaentera($convocatoria,$destinatarios,$convocatoria_baremo){
-        
+    public function crearconvocatoriaentera($convocatoria, $destinatarios, $convocatoria_baremo)
+    {
+
 
     }
 
-    public function leerConvocatoriasActivas()
-{
-    $currentDate = date('Y-m-d'); // Obtener la fecha actual
+    public function leerConvocatoriasActivas($idCandidato)
+    {
+        $currentDate = date('Y-m-d'); // Obtener la fecha actual
 
-    $query = "SELECT * FROM Convocatorias 
-              WHERE Fecha_ini = :fechaActual AND Fecha_fin >= :fechaActual";
+        $query = "SELECT * FROM Convocatorias 
+        WHERE Fecha_ini <= :fechaActual AND Fecha_fin >= :fechaActual 
+        AND idConvocatorias NOT IN (
+            SELECT Convocatorias_idConvocatorias FROM candidato_convocatorias WHERE Candidatos_idCandidato = :idCandidato
+        )";
 
-    $statement = $this->db->prepare($query);
-    $statement->bindParam(':fechaActual', $currentDate);
-    $statement->execute();
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':fechaActual', $currentDate);
+        $statement->bindParam(':idCandidato', $idCandidato);
+        $statement->execute();
 
-    $convocatorias = [];
+        $convocatorias = [];
 
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $convocatoria = new Convocatorias(
-            $row['idConvocatorias'],
-            $row['Movilidades'],
-            $row['Tiipo'],
-            $row['Fecha_ini'],
-            $row['Fecha_fin'],
-            $row['Fecha_ini_baremacion'],
-            $row['Fecha_fin_baremacion'],
-            $row['Fecha_lis_provisional'],
-            $row['Fecha_lis_definitiva'],
-            $row['Destino'],
-            $row['Proyectos_CodProyecto']
-        );
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $convocatoria = new Convocatorias(
+                $row['idConvocatorias'],
+                $row['Movilidades'],
+                $row['Tiipo'],
+                $row['Fecha_ini'],
+                $row['Fecha_fin'],
+                $row['Fecha_ini_baremacion'],
+                $row['Fecha_fin_baremacion'],
+                $row['Fecha_lis_provisional'],
+                $row['Fecha_lis_definitiva'],
+                $row['Destino'],
+                $row['Proyectos_CodProyecto']
+            );
 
-        $convocatorias[] = $convocatoria;
+            $convocatorias[] = $convocatoria;
+        }
+
+        return $convocatorias;
     }
 
-    return $convocatorias;
-}
+    public function leerconvocoli($idCandidato)
+    {
+        $query = "SELECT c.* FROM convocatorias c
+        JOIN candidato_convocatorias s ON c.idConvocatorias = s.Convocatorias_idConvocatorias
+        WHERE s.Candidatos_idCandidato = :idCandidato";
+
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':idCandidato', $idCandidato);
+        $statement->execute();
+
+        $convocatorias = [];
+
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $convocatoria = new Convocatorias(
+                $row['idConvocatorias'],
+                $row['Movilidades'],
+                $row['Tiipo'],
+                $row['Fecha_ini'],
+                $row['Fecha_fin'],
+                $row['Fecha_ini_baremacion'],
+                $row['Fecha_fin_baremacion'],
+                $row['Fecha_lis_provisional'],
+                $row['Fecha_lis_definitiva'],
+                $row['Destino'],
+                $row['Proyectos_CodProyecto']
+            );
+
+            $convocatorias[] = $convocatoria;
+        }
+
+        return $convocatorias;
+    }
 
 }
 ?>

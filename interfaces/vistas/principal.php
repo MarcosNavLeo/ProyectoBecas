@@ -6,6 +6,7 @@
     <title>CONSULTORIO DE BECAS</title>
     <link rel="stylesheet" type="text/css" href="http://virtual.local.marcos.com/interfaces/estilos/stylesPrinAlum.css">
     <script src="http://virtual.local.marcos.com/interfaces/javascript/listadoconvo.js"></script>
+    <!-- <script src="http://virtual.local.marcos.com/interfaces/javascript/mostrarpdf.js"></script> -->
 
 </head>
 
@@ -18,6 +19,7 @@
     }
     $nombre = $user->getNombre();
     $nombreEnMayuscula = strtoupper($nombre);
+    $id=$user->getIdCandidato();
 
     if (isset($_POST['Logaout'])) {
         Session::cierra_sesion();
@@ -31,7 +33,7 @@
         echo '<h1 id="titulo">BIENVENIDO ' . $nombreEnMayuscula . '</h1>';
         ?>
         <div id="enlacesNav">
-            <a href="?menu=examen">MIS CONVOCATORIAS</a>
+            <a href="?menu=Solicitudes&id=<?php echo $id; ?>">MIS CONVOCATORIAS</a>
             <!-- <a><button value="SOLICITAR CONVOCATORIA" name="Solicitar" id="SoliConvo">SOLICITAR CONVOCATORIA</button></a> -->
             <form name="formulario" method="post">
                 <button type="submit" value="CERRAR SESION" name="Logaout" id="Cierrasesion">CERRAR SESION</button>
@@ -72,15 +74,9 @@
                     <label for="domicilio">Domicilio:</label>
                     <input type="text" id="domicilio" name="domicilio"><br>
 
-                    <h3>Archivos Adjuntos</h3>
-                    <label for="nota">Nota:</label>
-                    <input type="file" id="nota" name="nota"><br>
-
-                    <label for="entrevista">Entrevista:</label>
-                    <input type="file" id="entrevista" name="entrevista" disabled><br>
-
-                    <label for="idioma">Idioma:</label>
-                    <input type="file" id="idioma" name="idioma" disabled><br>
+                    <div id="archivos">
+                        <h3>Archivos Adjuntos</h3>
+                    </div>
 
                     <input type="submit" value="Guardar">
                 </form>

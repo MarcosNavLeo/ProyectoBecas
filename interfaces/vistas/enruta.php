@@ -18,5 +18,8 @@ if (isset($_GET['menu'])) {
     if ($_GET['menu'] == "PrinAdmin") {
         require_once $_SERVER["DOCUMENT_ROOT"] . '/interfaces/vistas/admin.php';
     }
+    if ($_GET['menu'] == "Solicitudes") {
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/interfaces/vistas/solicitudes.php';
+    }
 }
 ?>

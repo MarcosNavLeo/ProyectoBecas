@@ -105,9 +105,15 @@ class RepositorioCandidatoConvocatorias
         $candidatoConvocatoriaData = $statement->fetch(PDO::FETCH_ASSOC);
     
         if ($candidatoConvocatoriaData) {
-            return new CandidatoConvocatoria(
+            return new candidato_convocatorias(
                 $candidatoConvocatoriaData['Convocatorias_idConvocatorias'],
-                $candidatoConvocatoriaData['Candidatos_idCandidato']
+                $candidatoConvocatoriaData['Candidatos_idCandidato'],
+                $candidatoConvocatoriaData['DNI'],
+                $candidatoConvocatoriaData['Nombre'],
+                $candidatoConvocatoriaData['Apellidos'],
+                $candidatoConvocatoriaData['Telefono'],
+                $candidatoConvocatoriaData['Correo'],
+                $candidatoConvocatoriaData['Domicilio']
             );
         }
     

@@ -56,7 +56,7 @@
                 </select>
 
                 <label for="movilidades">Movilidades:</label>
-                <input type="text" id="movilidades" name="movilidades" placeholder="Movilidades" data-valida="relleno">
+                <input type="number" id="movilidades" name="movilidades" placeholder="Movilidades" data-valida="numero">
             </fieldset>
 
 
@@ -75,37 +75,35 @@
             <!-- Fechas -->
             <fieldset>
                 <label for="fechaInicioSolicitud">Fecha Inicio Solicitud:</label>
-                <input type="date" id="fechaInicioSolicitud" name="fechaInicioSolicitud" data-valida="fechaMenor"
-                    data-comparar="fechaFinalSolicitud" data-valida="fechaObligatoria">
+                <input type="date" id="fechaInicioSolicitud" name="fechaInicioSolicitud"
+                    >
                 <div id="errorFechaInicioSolicitud" class="error-fecha"></div>
 
-
                 <label for="fechaInicioPrueba">Fecha Inicio Prueba:</label>
-                <input type="date" id="fechaInicioPrueba" name="fechaInicioPrueba" data-valida="fechaMenor"
-                    data-comparar="fechaFinPrueba" data-valida="fechaObligatoria">
+                <input type="date" id="fechaInicioPrueba" name="fechaInicioPrueba" >
                 <div id="errorFechaInicioPrueba" class="error-fecha"></div>
 
                 <label for="fechaListadoProvisional">Fecha Listado Provisional:</label>
-                <input type="date" id="fechaListadoProvisional" name="fechaListadoProvisional" data-valida="fechaMenor"
-                    data-comparar="fechaListadoDefinitivo" data-valida="fechaObligatoria">
+                <input type="date" id="fechaListadoProvisional" name="fechaListadoProvisional"
+                    >
                 <div id="errorFechaListadoProvisional" class="error-fecha"></div>
             </fieldset>
 
             <fieldset>
                 <label for="fechaFinalSolicitud">Fecha Final Solicitud:</label>
-                <input type="date" id="fechaFinalSolicitud" name="fechaFinalSolicitud" data-valida="fechaObligatoria">
+                <input type="date" id="fechaFinalSolicitud" name="fechaFinalSolicitud">
                 <div id="errorFechaFinalSolicitud" class="error-fecha"></div>
 
                 <label for="fechaFinPrueba">Fecha Fin Prueba:</label>
-                <input type="date" id="fechaFinPrueba" name="fechaFinPrueba" data-valida="fechaObligatoria">
+                <input type="date" id="fechaFinPrueba" name="fechaFinPrueba">
                 <div id="errorFechaFinPrueba" class="error-fecha"></div>
 
                 <label for="fechaListadoDefinitivo">Fecha Listado Definitivo:</label>
-                <input type="date" id="fechaListadoDefinitivo" name="fechaListadoDefinitivo"
-                    data-valida="fechaObligatoria">
+                <input type="date" id="fechaListadoDefinitivo" name="fechaListadoDefinitivo">
                 <div id="errorFechaListadoDefinitivo" class="error-fecha"></div>
             </fieldset>
-            <div id="destinatariosCheckboxes" data-valida="checkbox">
+
+            <div id="destinatariosCheckboxes">
                 <label for="destinatarios">Destinatarios:</label>
             </div>
 

@@ -1,5 +1,35 @@
 window.addEventListener('load', function () {
-    fetch('http://virtual.local.marcos.com/api/apiconvocatorias.php?todasConvocatorias')
+    const archivosDiv = document.getElementById('archivos');
+
+    function crearCampoAdjunto(nombre,id) {
+        const label = document.createElement('label');
+        label.textContent = nombre + ':';
+
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.name = nombre;
+        input.setAttribute('data-id',id); // Guardar el ID del item_barenable en un atributo data
+
+
+        archivosDiv.appendChild(label);
+        archivosDiv.appendChild(input);
+        archivosDiv.appendChild(document.createElement('br'));
+    }
+
+    fetch('http://virtual.local.marcos.com/api/apitem_barenables.php')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                crearCampoAdjunto(item.nombre,item.idItemBarenables);
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos de la API:', error);
+        });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const idCandidato = urlParams.get('id');
+    fetch(`http://virtual.local.marcos.com/api/apiconvocatorias.php?todasConvocatorias&id=${idCandidato}`)
         .then(response => response.json())
         .then(data => {
             const listaConvo = document.getElementById('listaconvo');
@@ -10,6 +40,7 @@ window.addEventListener('load', function () {
                 const tipo = convocatoriaInfo.tipo;
                 const fechaFin = convocatoriaInfo.fechaFin;
                 const destino = convocatoriaInfo.destino;
+
 
                 const btnSolicitar = document.createElement('button');
                 btnSolicitar.textContent = 'Solicitar';
@@ -22,8 +53,6 @@ window.addEventListener('load', function () {
 
                 btnSolicitar.addEventListener('click', function () {
                     const convocatoriaId = this.value;
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const idCandidato = urlParams.get('id');
                     // Realizar la solicitud fetch a la API del candidato con el ID correspondiente
                     fetch(`http://virtual.local.marcos.com/api/apicandidatos.php?id=${idCandidato}`)
                         .then(response => response.json())
@@ -71,8 +100,7 @@ window.addEventListener('load', function () {
                                 if (response.ok) {
                                     alert('Beca solicitada correctamente.');
                                     modal.style.display = 'none'; // Cerrar la ventana modal
-                                    // Eliminar la beca del listado después de la solicitud
-                                    li.remove(); // Aquí eliminas el elemento li correspondiente
+                                    window.location.reload(); // Recargar la página
                                 } else {
                                     throw new Error('Error al insertar el candidato');
                                 }
