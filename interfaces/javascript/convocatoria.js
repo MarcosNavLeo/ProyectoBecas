@@ -99,87 +99,30 @@ window.addEventListener("load", function () {
                 });
         });
     // Obtener los elementos del DOM para cada campo de fecha por su ID
-    var fechaInicioSolicitud = document.getElementById('fechaInicioSolicitud');
-    var fechaFinalSolicitud = document.getElementById('fechaFinalSolicitud');
-    var fechaInicioPrueba = document.getElementById('fechaInicioPrueba');
-    var fechaFinPrueba = document.getElementById('fechaFinPrueba');
-    var fechaListadoProvisional = document.getElementById('fechaListadoProvisional');
-    var fechaListadoDefinitivo = document.getElementById('fechaListadoDefinitivo');
+    var fechas = [
+        document.getElementById('fechaInicioSolicitud'),
+        document.getElementById('fechaFinalSolicitud'),
+        document.getElementById('fechaInicioPrueba'),
+        document.getElementById('fechaFinPrueba'),
+        document.getElementById('fechaListadoProvisional'),
+        document.getElementById('fechaListadoDefinitivo')
+    ];
 
-    var errorFechaInicioSolicitud = document.getElementById('errorFechaInicioSolicitud');
-    var errorFechaFinalSolicitud = document.getElementById('errorFechaFinalSolicitud');
-    var errorFechaInicioPrueba = document.getElementById('errorFechaInicioPrueba');
-    var errorFechaFinPrueba = document.getElementById('errorFechaFinPrueba');
-    var errorFechaListadoProvisional = document.getElementById('errorFechaListadoProvisional');
-    var errorFechaListadoDefinitivo = document.getElementById('errorFechaListadoDefinitivo');
-
+    // Event listener para cambios en fechas
+    fechas.forEach(function (fecha, index) {
+        fecha.addEventListener('change', function () {
+            // Habilitar el siguiente campo de fecha si la fecha actual no está vacía
+            var nextIndex = index + 1;
+            if (nextIndex < fechas.length && fecha.value.trim() !== '') {
+                fechas[nextIndex].disabled = false;
+            }
+        });
+    });
 
     // Inicialmente, deshabilitar todos los campos de fecha excepto el primero
-    fechaFinalSolicitud.disabled = true;
-    fechaInicioPrueba.disabled = true;
-    fechaFinPrueba.disabled = true;
-    fechaListadoProvisional.disabled = true;
-    fechaListadoDefinitivo.disabled = true;
-
-    // Event listeners para cada par de fechas
-
-    fechaInicioSolicitud.addEventListener('change', function () {
-        if (fechaFinalSolicitud.value && !this.esFechaMenorQue('fechaFinalSolicitud')) {
-            errorFechaInicioSolicitud.textContent = 'La fecha de inicio de solicitud debe ser menor que la fecha final.';
-            this.value = '';
-        } else {
-            errorFechaInicioSolicitud.textContent = '';
-            fechaFinalSolicitud.disabled = !this.value;
-        }
-    });
-
-    fechaFinalSolicitud.addEventListener('change', function () {
-        if (fechaInicioSolicitud.value && !fechaInicioSolicitud.esFechaMenorQue('fechaFinalSolicitud')) {
-            errorFechaFinalSolicitud.textContent = 'La fecha final de solicitud debe ser mayor que la fecha de inicio.';
-            this.value = '';
-        } else {
-            errorFechaFinalSolicitud.textContent = '';
-            fechaInicioPrueba.disabled = !this.value;
-        }
-    });
-
-    fechaInicioPrueba.addEventListener('change', function () {
-        if (fechaFinPrueba.value && !this.esFechaMenorQue('fechaFinPrueba')) {
-            errorFechaInicioPrueba.textContent = 'La fecha de inicio de prueba debe ser menor que la fecha final.';
-            this.value = '';
-        } else {
-            errorFechaInicioPrueba.textContent = '';
-            fechaFinPrueba.disabled = !this.value;
-        }
-    });
-
-    fechaFinPrueba.addEventListener('change', function () {
-        if (fechaInicioPrueba.value && !fechaInicioPrueba.esFechaMenorQue('fechaFinPrueba')) {
-            errorFechaFinPrueba.textContent = 'La fecha final de prueba debe ser mayor que la fecha de inicio.';
-            this.value = '';
-        } else {
-            errorFechaFinPrueba.textContent = '';
-            fechaListadoProvisional.disabled = !this.value;
-        }
-    });
-
-    fechaListadoProvisional.addEventListener('change', function () {
-        if (fechaListadoDefinitivo.value && !this.esFechaMenorQue('fechaListadoDefinitivo')) {
-            errorFechaListadoProvisional.textContent = 'La fecha de listado provisional debe ser menor que la fecha de listado definitivo.';
-            this.value = '';
-        } else {
-            errorFechaListadoProvisional.textContent = '';
-            fechaListadoDefinitivo.disabled = !this.value;
-        }
-    });
-
-    fechaListadoDefinitivo.addEventListener('change', function () {
-        if (fechaListadoProvisional.value && !fechaListadoProvisional.esFechaMenorQue('fechaListadoDefinitivo')) {
-            errorFechaListadoDefinitivo.textContent = 'La fecha de listado definitivo debe ser mayor que la fecha de listado provisional.';
-            this.value = '';
-        } else {
-            errorFechaListadoDefinitivo.textContent = '';
-            // Aquí puedes habilitar cualquier otro campo que dependa de este
+    fechas.forEach(function (fecha, index) {
+        if (index !== 0) {
+            fecha.disabled = true;
         }
     });
 
@@ -220,25 +163,23 @@ window.addEventListener("load", function () {
         }
         );
 
-        var form = document.getElementById('formulario');
-        var mensaje = document.getElementById('errorFormulario');
-        
-        // Controlamos el evento de envío del formulario
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-        
-            // Comprobamos los valores    
-            if (form.valida()) {
-                form.submit();
-            } else {
-                // Mostramos mensaje de error
-                mensaje.textContent = "¡Por favor completa correctamente todos los campos!";
-                // Agregamos la clase 'invalido' al formulario
-                form.classList.add('invalido');
-            }
-        });
-        
+    var form = document.getElementById('formulario');
+    var mensaje = document.getElementById('errorFormulario');
 
+    // Controlamos el evento de envío del formulario
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Comprobamos los valores    
+        if (form.valida()) {
+            form.submit();
+        } else {
+            // Mostramos mensaje de error
+            mensaje.textContent = "¡Por favor completa correctamente todos los campos!";
+            // Agregamos la clase 'invalido' al formulario
+            form.classList.add('invalido');
+        }
+    });
 });
 
 

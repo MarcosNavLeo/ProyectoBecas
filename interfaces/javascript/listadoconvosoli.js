@@ -12,7 +12,16 @@ window.addEventListener("load", function () {
             // Recorrer las convocatorias y agregarlas a la lista en tu HTML
             data.forEach(convocatoria => {
                 const li = document.createElement('li');
-                li.textContent = `ID: ${convocatoria.convocatoria.idConvocatorias}, Tipo: ${convocatoria.convocatoria.tipo}, Movilidades: ${convocatoria.convocatoria.movilidades}, Fecha de fin: ${convocatoria.convocatoria.fechaFin}, Destino: ${convocatoria.convocatoria.destino}`;
+                let texto = `ID: ${convocatoria.convocatoria.idConvocatorias}, Tipo: ${convocatoria.convocatoria.tipo}, Movilidades: ${convocatoria.convocatoria.movilidades}, Fecha de fin: ${convocatoria.convocatoria.fechaFin}, Destino: ${convocatoria.convocatoria.destino}`;
+
+                if (convocatoria.baremos_idiomas && convocatoria.baremos_idiomas.length > 0) {
+                    texto += `, Idioma: `;
+                    convocatoria.baremos_idiomas.forEach(baremo => {
+                        texto += `${baremo.nivelIdioma} (${baremo.puntos} puntos) `;
+                    });
+                }
+
+                li.textContent = texto;
                 listaSoli.appendChild(li);
             });
         })

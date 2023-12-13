@@ -95,6 +95,7 @@ HTMLFormElement.prototype.valida = function () {
     let n = elementos.length;
     for (let i = 0; i < n; i++) {
         let tipo = elementos[i].getAttribute("data-valida");
+        debugger;
         var aux=elementos[i][tipo]();
         if(aux){
             elementos[i].classList.add("valido");

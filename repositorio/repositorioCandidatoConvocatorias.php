@@ -74,23 +74,6 @@ class RepositorioCandidatoConvocatorias
     }
     
 
-    public function leerTodos() {
-        $query = "SELECT Convocatorias_idConvocatorias, Candidatos_idCandidato FROM candidato_convocatorias";
-        $statement = $this->db->prepare($query);
-        $statement->execute();
-    
-        $candidatoConvocatoriasList = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
-        $candidatoConvocatorias = array();
-    
-        foreach ($candidatoConvocatoriasList as $candidatoConvocatoriaData) {
-            $candidatoConvocatoria = new CandidatoConvocatoria($candidatoConvocatoriaData['Convocatorias_idConvocatorias'], $candidatoConvocatoriaData['Candidatos_idCandidato']);
-            $candidatoConvocatorias[] = $candidatoConvocatoria;
-        }
-    
-        return $candidatoConvocatorias;
-    }
-
     public function leerCandidatoConvocatoria($candidatoConvocatoria) {
         $query = "SELECT * FROM candidato_convocatorias WHERE Convocatorias_idConvocatorias = :idConvocatoria AND Candidatos_idCandidato = :idCandidato";
         $statement = $this->db->prepare($query);
@@ -119,6 +102,34 @@ class RepositorioCandidatoConvocatorias
     
         return null;
     }
+
+    public function leersolicitudesconvo($idConvocatoria) {
+        $query = "SELECT * FROM candidato_convocatorias WHERE Convocatorias_idConvocatorias = :idConvocatoria";
+    
+        $statement = $this->db->prepare($query);
+    
+        $statement->bindParam(':idConvocatoria', $idConvocatoria, PDO::PARAM_INT);
+    
+        $statement->execute();
+    
+        $solicitudes = []; 
+    
+        while ($candidatoConvocatoriaData = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $solicitudes[] = new candidato_convocatorias(
+                $candidatoConvocatoriaData['Convocatorias_idConvocatorias'],
+                $candidatoConvocatoriaData['Candidatos_idCandidato'],
+                $candidatoConvocatoriaData['DNI'],
+                $candidatoConvocatoriaData['Nombre'],
+                $candidatoConvocatoriaData['Apellidos'],
+                $candidatoConvocatoriaData['Telefono'],
+                $candidatoConvocatoriaData['Correo'],
+                $candidatoConvocatoriaData['Domicilio']
+            );
+        }
+    
+        return $solicitudes; 
+    }
+    
     
 }
 

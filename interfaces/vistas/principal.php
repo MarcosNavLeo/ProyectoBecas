@@ -57,26 +57,27 @@
                 <h2>Datos Personales</h2>
                 <form id="modalForm">
                     <label for="dni">DNI:</label>
-                    <input type="text" id="dni" name="dni"><br>
+                    <input type="text" id="dni" name="dni" disabled><br>
 
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre"><br>
+                    <input type="text" id="nombre" name="nombre" disabled><br>
 
                     <label for="apellidos">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos"><br>
+                    <input type="text" id="apellidos" name="apellidos" disabled><br>
 
                     <label for="telefono">Teléfono:</label>
-                    <input type="text" id="telefono" name="telefono"><br>
+                    <input type="text" id="telefono" name="telefono" ><br>
 
                     <label for="correo">Correo:</label>
-                    <input type="email" id="correo" name="correo"><br>
+                    <input type="email" id="correo" name="correo" ><br>
 
                     <label for="domicilio">Domicilio:</label>
-                    <input type="text" id="domicilio" name="domicilio"><br>
+                    <input type="text" id="domicilio" name="domicilio" ><br>
 
                     <div id="archivos">
                         <h3>Archivos Adjuntos</h3>
                     </div>
+                    <div id="mensajeError"></div>
 
                     <input type="submit" value="Guardar">
                 </form>

@@ -163,7 +163,7 @@ ul li ul li {
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 97;
   left: 0;
   top: 0;
   width: 100%;
@@ -230,7 +230,10 @@ input[type="submit"]:hover {
   background-color: #2e2e2e;
 }
 
-#abrirNota,#abrirEntrevista,#abrirIdioma{
-  width: 103%;
+.ficheros{
+  width: 20%;
   padding: 6px;
+  margin-bottom: 2%;
+  margin-left: 40%;
+  margin-top: 1%;
 }

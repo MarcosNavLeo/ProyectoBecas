@@ -107,6 +107,49 @@ if ($metodo == 'GET') {
             // Manejo de excepciones
             echo json_encode(array('error' => 'Error al obtener las convocatorias solicitadas: ' . $e->getMessage()));
         }
+    } elseif (isset($_GET['todas'])) {
+        $dbConnection = DB::abreconexion();
+        $repositorioConvocatoria = new RepositorioConvocatoria($dbConnection);
+        $repositorioDestinatariosConvocatorias = new RepositorioDestinatariosConvocatorias($dbConnection);
+        $repositorioConvocatoriaBaremo = new RepositorioConvocatoriaBaremo($dbConnection);
+        $repositorioConvocatoriaBaremoIdioma = new RepositorioConvocatoriaBaremoIdioma($dbConnection);
+
+        // Consulta para obtener todas las convocatorias
+        $todasConvocatorias = $repositorioConvocatoria->leertodas();
+
+        // Array para almacenar todas las convocatorias con su información relacionada
+        $convocatoriasConInfo = [];
+
+        foreach ($todasConvocatorias as $convocatoria) {
+            $idConvocatoria = $convocatoria->getIdConvocatorias();
+
+            // Obtener destinatarios de la convocatoria
+            $destinatariosConvocatoria = $repositorioDestinatariosConvocatorias->leertodosdestina($idConvocatoria);
+
+            // Obtener baremos de la convocatoria
+            $convocatoriaBaremos = $repositorioConvocatoriaBaremo->leerConvocatoriasBaremo($idConvocatoria);
+
+            // Obtener baremos de idiomas de la convocatoria
+            $convocatoriaBaremosIdiomas = $repositorioConvocatoriaBaremoIdioma->leerTodosConvo($idConvocatoria);
+
+            // Construir información completa de la convocatoria
+            $infoConvocatoria = [
+                'convocatoria' => $convocatoria,
+                'destinatarios' => $destinatariosConvocatoria,
+                'baremos' => $convocatoriaBaremos,
+                'baremos_idiomas' => $convocatoriaBaremosIdiomas
+            ];
+
+            // Agregar información de la convocatoria al array
+            $convocatoriasConInfo[] = $infoConvocatoria;
+        }
+
+        // Si se encuentran convocatorias, las devuelve como JSON
+        if (!empty($convocatoriasConInfo)) {
+            echo json_encode($convocatoriasConInfo);
+        } else {
+            echo json_encode(array('mensaje' => 'No se encontraron convocatorias.'));
+        }
     }
 } else {
     echo json_encode(array('error' => 'Método no permitido.'));
