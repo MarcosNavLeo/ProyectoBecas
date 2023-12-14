@@ -24,5 +24,8 @@ if (isset($_GET['menu'])) {
     if ($_GET['menu'] == "listaconvo") {
         require_once $_SERVER["DOCUMENT_ROOT"] . '/interfaces/vistas/convocatorias.php';
     }
+    if ($_GET['menu'] == "editar") {
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/interfaces/vistas/editarconvo.php';
+    }
 }
 ?>

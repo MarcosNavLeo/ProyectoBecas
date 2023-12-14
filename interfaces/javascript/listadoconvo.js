@@ -13,11 +13,9 @@ window.addEventListener('load', function () {
         input.setAttribute('data-id', id);
         input.id = 'fichero.' + id;
 
-
-
         const abrirPDFButton = document.createElement('button');
         abrirPDFButton.textContent = 'Abrir PDF';
-        abrirPDFButton.id = 'btnAbrirPDF_' + id; // ID para el botón
+        abrirPDFButton.id = 'btnAbrirPDF';
         abrirPDFButton.className = 'ficheros';
 
 

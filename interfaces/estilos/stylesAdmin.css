@@ -76,7 +76,6 @@ input[type="date"] {
     font-size: 16px;
 }
 
-/* Asegurar mayor especificidad */
 input#notaMaxima,
 input#notaMinima {
     width: 40%;
@@ -116,7 +115,6 @@ img {
 }
 
 #Cierrasesion {
-    /* Cambiar el color de fondo */
     background-color: #838383;
     color: white;
     padding: 10px 20px;
@@ -135,7 +133,6 @@ img {
 }
 
 #SoliConvo {
-    /* Cambiar el color de fondo */
     background-color: #838383;
     color: white;
     padding: 10px 20px;

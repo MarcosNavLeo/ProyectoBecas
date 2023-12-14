@@ -4,6 +4,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/helpers/autocargador.php';
 // Obtiene el método de la solicitud HTTP (GET, POST, PUT, DELETE)
 $metodo = $_SERVER['REQUEST_METHOD'];
 
+
 // Manejo de solicitudes GET
 if ($metodo == 'GET') {
     // Si se solicita un listado de todas las convocatorias con sus destinatarios, baremos y baremos de idiomas

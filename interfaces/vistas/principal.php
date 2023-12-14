@@ -6,7 +6,6 @@
     <title>CONSULTORIO DE BECAS</title>
     <link rel="stylesheet" type="text/css" href="http://virtual.local.marcos.com/interfaces/estilos/stylesPrinAlum.css">
     <script src="http://virtual.local.marcos.com/interfaces/javascript/listadoconvo.js"></script>
-    <!-- <script src="http://virtual.local.marcos.com/interfaces/javascript/mostrarpdf.js"></script> -->
 
 </head>
 
@@ -34,7 +33,6 @@
         ?>
         <div id="enlacesNav">
             <a href="?menu=Solicitudes&id=<?php echo $id; ?>">MIS CONVOCATORIAS</a>
-            <!-- <a><button value="SOLICITAR CONVOCATORIA" name="Solicitar" id="SoliConvo">SOLICITAR CONVOCATORIA</button></a> -->
             <form name="formulario" method="post">
                 <button type="submit" value="CERRAR SESION" name="Logaout" id="Cierrasesion">CERRAR SESION</button>
             </form>

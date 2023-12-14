@@ -69,7 +69,6 @@ body {
   }
   
   #Cierrasesion {
-    /* Cambiar el color de fondo */
     background-color: #838383;
     color: white;
     padding: 10px 20px;
@@ -97,7 +96,6 @@ body {
   }
   
   #SoliConvo {
-    /* Cambiar el color de fondo */
     background-color: #838383;
     color: white;
     padding: 10px 20px;
@@ -146,7 +144,6 @@ body {
   }
 
   #btnpdf {
-    /* Estilos para el botón "Solicitar" */
     background-color: transparent;
     color: #fff;
     border: none;
