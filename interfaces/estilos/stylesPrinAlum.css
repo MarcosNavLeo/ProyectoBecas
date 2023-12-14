@@ -146,17 +146,16 @@ ul li ul li {
 }
 #btnSolicitar {
   /* Estilos para el botón "Solicitar" */
-  padding: 8px 16px;
-  background-color: #3498db;
+  background-color: transparent; /* Fondo transparente */
+  border: none; 
   color: #fff;
-  border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-left: 1%;
 }
 
 #btnSolicitar:hover {
-  background-color: #2980b9;
+  background-color: #303030;
 }
 
 /* Estilos para la ventana modal */
@@ -236,4 +235,13 @@ input[type="submit"]:hover {
   margin-bottom: 2%;
   margin-left: 40%;
   margin-top: 1%;
+}
+
+#btnSolicitar img {
+  max-width: 30px;
+  max-height: 30px; 
+}
+
+span{
+  margin-top: 9px;
 }

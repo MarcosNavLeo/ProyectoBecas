@@ -27,13 +27,23 @@ if ($metodo === 'POST') {
 
                 // Mover archivo a la carpeta correspondiente
                 if (move_uploaded_file($fichero_temporal, $fichero_subido)) {
-                    enviarRespuesta(201, "El archivo $fichero_nombre se ha cargado correctamente.");
+                    // Guardar el nombre del archivo en un array para referencia futura
+                    $archivos_subidos[] = $fichero_nombre;
                 } else {
-                    enviarRespuesta(500, "Hubo un error al cargar el archivo $fichero_nombre.");
+                    $errores[] = "Hubo un error al cargar el archivo $fichero_nombre.";
                 }
             } else {
-                enviarRespuesta(400, "El archivo $fichero_nombre no es un PDF válido.");
+                $errores[] = "El archivo $fichero_nombre no es un PDF válido.";
             }
+        }
+
+        // Verificar si hubo errores
+        if (!empty($errores)) {
+            // Si hay errores, enviar una respuesta con los mensajes de error
+            enviarRespuesta(500, "Hubo errores al cargar los archivos: " . implode(', ', $errores));
+        } else {
+            // Si no hay errores, enviar una respuesta de éxito con los archivos subidos
+            enviarRespuesta(201, "Archivos subidos correctamente: " . implode(', ', $archivos_subidos));
         }
     } else {
         // Manejo de la lógica para procesar la solicitud de baremación

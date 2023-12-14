@@ -165,6 +165,7 @@ body {
     width: 80%; 
     max-width: 600px; 
     margin: 1% auto; /* Centramos vertical y horizontalmente */
+    margin-top: 15%;
   }
   
   .close {
@@ -183,8 +184,7 @@ body {
 
   #btnver {
     /* Estilos para el botón "Solicitar" */
-    padding: 8px 16px;
-    background-color: #3498db;
+    background-color: transparent;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -193,5 +193,27 @@ body {
   }
   
   #btnver:hover {
-    background-color: #2980b9;
+    background-color: #373737;
   }
+
+  #solicitudInfo {
+    font-size: 1.2em;
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #cecece;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  #btnver img {
+    max-width: 34px;
+    max-height: 34px; 
+  }
+
+  span {
+    margin-top: 12px;
+  }
+  
+  
+  
+  

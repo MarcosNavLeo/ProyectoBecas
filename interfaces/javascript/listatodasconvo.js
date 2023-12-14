@@ -11,10 +11,23 @@ window.addEventListener("load", function () {
                 const destino = convocatoriaInfo.destino;
                 const id = convocatoriaInfo.idConvocatorias;
 
+                const listaconvo = document.getElementById('listaconvo');
+
+                // Crear un nuevo <li> para la convocatoria
+                const li = document.createElement('li');
+                li.style.display = 'flex'; // Para mantener los elementos en línea
+
                 const btnver = document.createElement('button');
-                btnver.textContent = 'Ver Solicitudes';
                 btnver.id = 'btnver';
                 btnver.setAttribute('value', convocatoriaInfo.idConvocatorias);
+
+                // Crear un elemento <img> para la imagen
+                const imagenCV = document.createElement('img');
+                imagenCV.src = 'imagenes/cv.png'; // Ruta de la imagen relativa a la carpeta raíz del proyecto
+                imagenCV.alt = 'CV Image'; // Texto alternativo para la imagen
+
+                // Agregar la imagen al botón
+                btnver.appendChild(imagenCV);
 
                 btnver.addEventListener('click', () => {
                     fetch(`http://virtual.local.marcos.com/api/apicandidatoconvo.php?idConvocatorias=${id}`)
@@ -30,8 +43,12 @@ window.addEventListener("load", function () {
                             } else {
                                 data.forEach(solicitud => {
                                     const solicitudInfo = document.createElement('p');
-                                    solicitudInfo.textContent = `Id Candidato: ${solicitud.idCandidato} , Nombre: ${solicitud.Nombre}, Apellidos: ${solicitud.Apellidos}, DNI: ${solicitud.DNI}, Domicilio: ${solicitud.Domicilio} `;
-
+                                    const titulo = document.createElement('h3');
+                                    solicitudInfo.id = 'solicitudInfo';
+                                    titulo.textContent = `Solicitud del candidato: ${solicitud.idCandidato}`;
+                                    solicitudInfo.textContent = `Nombre: ${solicitud.Nombre}, Apellidos: ${solicitud.Apellidos}, DNI: ${solicitud.DNI}, Domicilio: ${solicitud.Domicilio}`;
+                                    
+                                    modalContent.appendChild(titulo); // Agregar título al modal
                                     modalContent.appendChild(solicitudInfo); // Agregar información de la solicitud al modal
                                 });
                             }
@@ -45,13 +62,19 @@ window.addEventListener("load", function () {
                         });
                 });
 
-                // Crear un nuevo <li> para la convocatoria
-                const li = document.createElement('li');
-                li.textContent = `id:${id}, Movilidades: ${movilidades}, Tipo: ${tipo}, Destino: ${destino}, Fecha Fin: ${fechaFin}`;
-                li.appendChild(btnver); // Agregar el botón al <li>
+                
+                let texto = `id:${id}, Movilidades: ${movilidades}, Tipo: ${tipo}, Destino: ${destino}, Fecha Fin: ${fechaFin}`;
 
-                // Agregar el <li> a la lista
-                listaConvo.appendChild(li);
+                // Crear un elemento para mostrar la información
+                const textoInfo = document.createElement('span');
+                textoInfo.textContent = texto;
+
+                // Agregar el texto y el botón al <li>
+                li.appendChild(textoInfo);
+                li.appendChild(btnver);
+
+                // Agregar el elemento <li> a la lista
+                listaconvo.appendChild(li);
             });
         })
         .catch(error => {

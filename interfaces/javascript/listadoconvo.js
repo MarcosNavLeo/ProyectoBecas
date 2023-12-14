@@ -12,7 +12,7 @@ window.addEventListener('load', function () {
         input.name = 'fichero.' + id;
         input.setAttribute('data-id', id);
         input.id = 'fichero.' + id;
-        
+
 
 
         const abrirPDFButton = document.createElement('button');
@@ -56,16 +56,38 @@ window.addEventListener('load', function () {
                 const fechaFin = convocatoriaInfo.fechaFin;
                 const destino = convocatoriaInfo.destino;
 
+                // Aquí se asume que el servidor devuelve un array de convocatorias en la variable 'data'
+                const listaSoli = document.getElementById('listaconvo');
 
-
-                const btnSolicitar = document.createElement('button');
-                btnSolicitar.textContent = 'Solicitar';
-                btnSolicitar.id = 'btnSolicitar';
-                btnSolicitar.setAttribute('value', convocatoriaInfo.idConvocatorias);
                 // Crear un nuevo <li> para la convocatoria
                 const li = document.createElement('li');
-                li.textContent = `Movilidades: ${movilidades}, Tipo: ${tipo}, Destino: ${destino}, Fecha Fin: ${fechaFin}`;
-                li.appendChild(btnSolicitar); // Agregar el botón al <li>
+                li.style.display = 'flex'; // Para mantener los elementos en línea
+
+                const btnSolicitar = document.createElement('button');
+                btnSolicitar.id = 'btnSolicitar';
+                btnSolicitar.setAttribute('value', convocatoriaInfo.idConvocatorias);
+
+                // Crear un elemento <img> para la imagen
+                const imagenCV = document.createElement('img');
+                imagenCV.src = 'imagenes/solicitar.png'; // Ruta de la imagen relativa a la carpeta raíz del proyecto
+                imagenCV.alt = 'CV Image'; // Texto alternativo para la imagen
+
+                // Agregar la imagen al botón
+                btnSolicitar.appendChild(imagenCV);
+
+                let texto = `Movilidades: ${movilidades}, Tipo: ${tipo}, Destino: ${destino}, Fecha Fin: ${fechaFin}`;
+
+                // Crear un elemento para mostrar la información
+                const textoInfo = document.createElement('span');
+                textoInfo.textContent = texto;
+
+                // Agregar el texto y el botón al <li>
+                li.appendChild(textoInfo);
+                li.appendChild(btnSolicitar);
+
+                // Agregar el elemento <li> a la lista
+                listaSoli.appendChild(li);
+
 
                 btnSolicitar.addEventListener('click', function () {
                     const convocatoriaId = this.value;
