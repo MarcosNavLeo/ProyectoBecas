@@ -192,13 +192,6 @@ ul li ul li {
   cursor: pointer;
 }
 
-/* Estilos para los elementos del formulario en la ventana modal */
-#modalForm {
-  display: flex;
-  flex-direction: column;
-}
-
-
 input[type="text"],
 input[type="email"],
 input[type="file"] {
@@ -242,5 +235,25 @@ input[type="submit"]:hover {
 span{
   margin-top: 9px;
 }
+
+#foto {
+  align-self: flex-end;
+}
+
+#imgFotoPerfil {
+  max-width: 100%;
+  height: auto;
+}
+
+#closer{
+  width: 30px;
+}
+
+#capture,#btnFinalizarFoto{
+  width: 20%;
+  background-color: #646464;
+  color: #fff;
+}
+
 
 

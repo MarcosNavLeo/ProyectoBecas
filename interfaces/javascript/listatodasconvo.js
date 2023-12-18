@@ -1,5 +1,4 @@
 window.addEventListener("load", function () {
-    const listaConvo = document.getElementById('listaconvo');
     fetch(`http://virtual.local.marcos.com/api/apiconvocatorias.php?todas`)
         .then(response => response.json())
         .then(data => {

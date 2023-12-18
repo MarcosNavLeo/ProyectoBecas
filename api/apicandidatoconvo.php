@@ -27,12 +27,13 @@ if ($metodo == 'POST') {
         $Telefono = $datos['Telefono'];
         $Correo = $datos['Correo'];
         $Domicilio = $datos['Domicilio'];
+        $foto=$datos['foto'];
 
         $dbConnection = DB::abreconexion();
         $repositorioCandidatoConvocatorias = new RepositorioCandidatoConvocatorias($dbConnection);
 
         // Crear un objeto CandidatoConvocatoria
-        $candidatoConvocatoria = new candidato_convocatorias($idConvocatoria, $idCandidato, $DNI, $Nombre, $Apellidos, $Telefono, $Correo, $Domicilio);
+        $candidatoConvocatoria = new candidato_convocatorias($idConvocatoria, $idCandidato, $DNI, $Nombre, $Apellidos, $Telefono, $Correo, $Domicilio,$foto);
 
         // Insertar el candidato en la base de datos
         $resultado = $repositorioCandidatoConvocatorias->insertarCandidatoConvocatoria($candidatoConvocatoria);

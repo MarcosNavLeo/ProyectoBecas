@@ -21,8 +21,8 @@ window.addEventListener("load", function () {
 
                 // Crear un elemento <img> para la imagen
                 const imagenCV = document.createElement('img');
-                imagenCV.src = 'imagenes/pdf.png'; // Ruta de la imagen relativa a la carpeta raíz del proyecto
-                imagenCV.alt = 'CV Image'; // Texto alternativo para la imagen
+                imagenCV.src = 'imagenes/pdf.png'; 
+                imagenCV.alt = 'CV Image'; 
 
                 // Agregar la imagen al botón
                 verpdf.appendChild(imagenCV);

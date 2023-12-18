@@ -10,6 +10,7 @@ class candidato_convocatorias implements JsonSerializable{
     private $Domicilio;
 
 
+
     public function __construct($idConvocatoria, $idCandidato, $DNI, $Nombre, $Apellidos, $Telefono, $Correo, $Domicilio) {
         $this->idConvocatoria = $idConvocatoria;
         $this->idCandidato = $idCandidato;
@@ -35,6 +36,10 @@ class candidato_convocatorias implements JsonSerializable{
 
     public function setIdCandidato($idCandidato) {
         $this->idCandidato = $idCandidato;
+    }
+
+    public function getFoto() {
+        return $this->foto;
     }
 
     public function getDNI() {
@@ -84,7 +89,7 @@ class candidato_convocatorias implements JsonSerializable{
     public function setDomicilio($Domicilio) {
         $this->Domicilio = $Domicilio;
     }
-
+    
     // Método de la interfaz JsonSerializable para serializar el objeto a JSON
     public function jsonSerialize() {
         $vars = get_object_vars($this);

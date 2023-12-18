@@ -1,7 +1,6 @@
 window.addEventListener('load', function () {
     const archivosDiv = document.getElementById('archivos');
-
-
+    const botonimg=document.getElementById("fotoSelect");
 
     function crearCampoAdjunto(nombre, id) {
         const label = document.createElement('label');
@@ -67,8 +66,8 @@ window.addEventListener('load', function () {
 
                 // Crear un elemento <img> para la imagen
                 const imagenCV = document.createElement('img');
-                imagenCV.src = 'imagenes/solicitar.png'; // Ruta de la imagen relativa a la carpeta raíz del proyecto
-                imagenCV.alt = 'CV Image'; // Texto alternativo para la imagen
+                imagenCV.src = 'imagenes/solicitar.png';
+                imagenCV.alt = 'CV Image'; 
 
                 // Agregar la imagen al botón
                 btnSolicitar.appendChild(imagenCV);
@@ -99,6 +98,8 @@ window.addEventListener('load', function () {
                             document.getElementById('correo').value = data.correo;
                             document.getElementById('telefono').value = data.Telefono;
                             document.getElementById('domicilio').value = data.Domicilio;
+                            document.getElementById('imgFotoPerfil').value = data.foto;
+                            document.getElementById('blob').value = data.foto;
                         })
                         .catch(error => {
                             console.error('Error al obtener los datos del candidato:', error);

@@ -39,7 +39,6 @@
         ?>
         <div id="enlacesNav">
             <a href="?menu=listaconvo">CONVOCATORIAS</a>
-            <a href="?menu=editar">EDITAR CONVOCATORIA</a>
             <form name="formulario" method="post">
                 <button type="submit" value="CERRAR SESION" name="Logaout" id="Cierrasesion">CERRAR SESION</button>
             </form>

@@ -15,7 +15,7 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 40%;
-    height: 80%;
+    height: 85%;
 }
 
 input[type="text"],
@@ -23,7 +23,6 @@ input[type="password"] {
     width: 90%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
     border-radius: 15px;
     background-color: #ffffff;
 }
@@ -62,7 +61,6 @@ input[type="date"] {
     width: 90%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
     border-radius: 15px;
     background-color: #ffffff;
 }
@@ -76,6 +74,18 @@ a{
 }
 
 .error_mensaje{
+    color: red;
+    font-size: 1.0em;
+}
+
+.valido{
+    border-color: green;
+}
+.invalido{
+    border-color: red;
+}
+
+#errorFormulario{
     color: red;
     font-size: 1.0em;
 }

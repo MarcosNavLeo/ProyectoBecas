@@ -18,9 +18,10 @@ class RepositorioCandidatoConvocatorias
         $Telefono = $candidatoConvocatoria->getTelefono();
         $Correo = $candidatoConvocatoria->getCorreo();
         $Domicilio = $candidatoConvocatoria->getDomicilio();
+        $foto=$candidatoConvocatoria->getFoto();
         
-        $query = "INSERT INTO candidato_convocatorias (Convocatorias_idConvocatorias, Candidatos_idCandidato,DNI,Nombre,Apellidos,Telefono,Correo,Domicilio) 
-                  VALUES (:idConvocatoria, :idCandidato,:DNI,:Nombre,:Apellidos,:Telefono,:Correo,:Domicilio)";
+        $query = "INSERT INTO candidato_convocatorias (Convocatorias_idConvocatorias, Candidatos_idCandidato,DNI,Nombre,Apellidos,Telefono,Correo,Domicilio,foto) 
+                  VALUES (:idConvocatoria, :idCandidato,:DNI,:Nombre,:Apellidos,:Telefono,:Correo,:Domicilio,:foto)";
 
         $statement = $this->db->prepare($query);
 
@@ -33,6 +34,7 @@ class RepositorioCandidatoConvocatorias
         $statement->bindParam(':Telefono', $Telefono, PDO::PARAM_STR);
         $statement->bindParam(':Correo', $Correo, PDO::PARAM_STR);
         $statement->bindParam(':Domicilio', $Domicilio, PDO::PARAM_STR);
+        $statement->bindParam(':foto', $foto, PDO::PARAM_STR);
 
         return $statement->execute();
     }
